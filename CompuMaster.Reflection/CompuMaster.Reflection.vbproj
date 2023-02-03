@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace></RootNamespace>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <Company>CompuMaster GmbH</Company>
+    <Copyright>2023 CompuMaster GmbH</Copyright>
+    <Title>CompuMaster.Reflection</Title>
+    <OptionStrict>On</OptionStrict>
+    <Description>Reflection simplified for all-days-purposes</Description>
+    <PackageIcon>logo_64x64.png</PackageIcon>
+    <RepositoryUrl>https://github.com/CompuMasterGmbH/CompuMaster.Reflection/</RepositoryUrl>
+    <PackageTags>Reflection,CreateObject,COM,Interop</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/CompuMasterGmbH/CompuMaster.Reflection/</PackageProjectUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="ComChildObjectLazy.vb" />
+    <Compile Remove="ComRootObjectLazy.vb" />
+    <Compile Remove="ObjectCollectionChildBase.vb" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\logo_64x64.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>
