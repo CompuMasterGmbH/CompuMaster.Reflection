@@ -8,8 +8,8 @@ Namespace CompuMaster.Reflection
     ''' </summary>
     Friend NotInheritable Class ReflectionWorker
 
-        Public Shared Function InvokeGetMembers(Of TSearchedMembers As System.Reflection.MemberInfo)(memberFilter As System.Reflection.BindingFlags, exceptionFilterInfo As String, objtype As Type, expectedType As Type) As List(Of TSearchedMembers)
-            Dim FoundMemberInfos As System.Reflection.MemberInfo() = InvokeGetMembers(memberFilter, exceptionFilterInfo, objtype)
+        Public Shared Function GetMembers(Of TSearchedMembers As System.Reflection.MemberInfo)(memberFilter As System.Reflection.BindingFlags, exceptionFilterInfo As String, objtype As Type, expectedType As Type) As List(Of TSearchedMembers)
+            Dim FoundMemberInfos As System.Reflection.MemberInfo() = GetMembers(memberFilter, exceptionFilterInfo, objtype)
             Dim Result As New List(Of TSearchedMembers)
             For Each Member In FoundMemberInfos
                 Select Case GetType(TSearchedMembers)
@@ -41,7 +41,7 @@ Namespace CompuMaster.Reflection
             Return Result
         End Function
 
-        Public Shared Function InvokeGetMembers(memberFilter As System.Reflection.BindingFlags, exceptionFilterInfo As String, objtype As Type) As System.Reflection.MemberInfo()
+        Public Shared Function GetMembers(memberFilter As System.Reflection.BindingFlags, exceptionFilterInfo As String, objtype As Type) As System.Reflection.MemberInfo()
             Try
                 Return objtype.GetMembers(memberFilter)
             Catch ex As Exception

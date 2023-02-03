@@ -11,12 +11,12 @@ Namespace CompuMaster.Reflection
         Private Const MEMBERFILTER As System.Reflection.BindingFlags = System.Reflection.BindingFlags.Static Or System.Reflection.BindingFlags.Public
         Private Const EXCEPTION_FILTERINFO As String = "public instance"
 
-        Public Shared Function InvokeGetMembers(Of TSearchedMembers As System.Reflection.MemberInfo)(objtype As Type, expectedType As Type) As List(Of TSearchedMembers)
-            Return ReflectionWorker.InvokeGetMembers(Of TSearchedMembers)(MEMBERFILTER, EXCEPTION_FILTERINFO, objtype, expectedType)
+        Public Shared Function GetMembers(Of TSearchedMembers As System.Reflection.MemberInfo)(objtype As Type, expectedType As Type) As List(Of TSearchedMembers)
+            Return ReflectionWorker.GetMembers(Of TSearchedMembers)(MEMBERFILTER, EXCEPTION_FILTERINFO, objtype, expectedType)
         End Function
 
-        Public Shared Function InvokeGetMembers(objtype As Type) As System.Reflection.MemberInfo()
-            Return ReflectionWorker.InvokeGetMembers(MEMBERFILTER, EXCEPTION_FILTERINFO, objtype)
+        Public Shared Function GetMembers(objtype As Type) As System.Reflection.MemberInfo()
+            Return ReflectionWorker.GetMembers(MEMBERFILTER, EXCEPTION_FILTERINFO, objtype)
         End Function
 
         Public Shared Function InvokeFunction(Of T)(objType As Type, name As String, ParamArray values As Object()) As T
