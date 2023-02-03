@@ -15,6 +15,14 @@ Namespace CompuMaster.Reflection
             Return ReflectionWorker.GetMembers(Of TSearchedMembers)(MEMBERFILTER, EXCEPTION_FILTERINFO, objtype, expectedType)
         End Function
 
+        Public Shared Function GetMembers(Of TSearchedMembers As System.Reflection.MemberInfo)(objtype As Type, expectedType As Type, expectedName As String) As TSearchedMembers
+            Return ReflectionWorker.GetMembers(Of TSearchedMembers)(MEMBERFILTER, EXCEPTION_FILTERINFO, objtype, expectedType, expectedName)
+        End Function
+
+        Public Shared Function GetMembers(Of TSearchedMembers As System.Reflection.MemberInfo)(objtype As Type, expectedName As String) As TSearchedMembers
+            Return ReflectionWorker.GetMembers(Of TSearchedMembers)(MEMBERFILTER, EXCEPTION_FILTERINFO, objtype, expectedName)
+        End Function
+
         Public Shared Function GetMembers(objtype As Type) As System.Reflection.MemberInfo()
             Return ReflectionWorker.GetMembers(MEMBERFILTER, EXCEPTION_FILTERINFO, objtype)
         End Function

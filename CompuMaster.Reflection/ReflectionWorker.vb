@@ -9,37 +9,73 @@ Namespace CompuMaster.Reflection
     Friend NotInheritable Class ReflectionWorker
 
         Public Shared Function GetMembers(Of TSearchedMembers As System.Reflection.MemberInfo)(memberFilter As System.Reflection.BindingFlags, exceptionFilterInfo As String, objtype As Type, expectedType As Type) As List(Of TSearchedMembers)
+            Return _GetMembers(Of TSearchedMembers)(memberFilter, exceptionFilterInfo, objtype, expectedType, Nothing)
+        End Function
+
+        Public Shared Function GetMembers(Of TSearchedMembers As System.Reflection.MemberInfo)(memberFilter As System.Reflection.BindingFlags, exceptionFilterInfo As String, objtype As Type, expectedType As Type, expectedName As String) As TSearchedMembers
+            Return _GetMembers(Of TSearchedMembers)(memberFilter, exceptionFilterInfo, objtype, expectedType, expectedName)(0)
+        End Function
+
+        Public Shared Function GetMembers(Of TSearchedMembers As System.Reflection.MemberInfo)(memberFilter As System.Reflection.BindingFlags, exceptionFilterInfo As String, objtype As Type, expectedName As String) As TSearchedMembers
+            Return _GetMembers(Of TSearchedMembers)(memberFilter, exceptionFilterInfo, objtype, Nothing, expectedName)(0)
+        End Function
+
+        Private Shared Function _GetMembers(Of TSearchedMembers As System.Reflection.MemberInfo)(memberFilter As System.Reflection.BindingFlags, exceptionFilterInfo As String, objtype As Type, expectedType As Type, expectedName As String) As List(Of TSearchedMembers)
             Dim FoundMemberInfos As System.Reflection.MemberInfo() = GetMembers(memberFilter, exceptionFilterInfo, objtype)
             Dim Result As New List(Of TSearchedMembers)
             For Each Member In FoundMemberInfos
-                Select Case GetType(TSearchedMembers)
-                    Case GetType(System.Reflection.MemberInfo)
-                        Throw New NotSupportedException("Filtering not supported for type MemberInfo, please use types derived from MemberInfo like FieldInfo, PropertyInfo, MethodInfo, etc. ")
-                    Case GetType(System.Reflection.FieldInfo)
-                        If Member.MemberType = System.Reflection.MemberTypes.Field AndAlso CType(Member, System.Reflection.FieldInfo).FieldType Is expectedType Then
-                            Result.Add(CType(Member, TSearchedMembers))
-                        End If
-                    Case GetType(System.Reflection.PropertyInfo)
-                        If Member.MemberType = System.Reflection.MemberTypes.Property AndAlso CType(Member, System.Reflection.PropertyInfo).PropertyType Is expectedType Then
-                            Result.Add(CType(Member, TSearchedMembers))
-                        End If
-                    Case GetType(System.Reflection.MethodInfo)
-                        If Member.MemberType = System.Reflection.MemberTypes.Method AndAlso CType(Member, System.Reflection.MethodInfo).ReturnType Is expectedType Then
-                            Result.Add(CType(Member, TSearchedMembers))
-                        End If
-                    Case GetType(System.Reflection.EventInfo)
-                        If Member.MemberType = System.Reflection.MemberTypes.Event AndAlso CType(Member, System.Reflection.EventInfo).EventHandlerType Is expectedType Then
-                            Result.Add(CType(Member, TSearchedMembers))
-                        End If
-                    Case GetType(System.Reflection.ConstructorInfo)
-                        If expectedType IsNot Nothing Then Throw New ArgumentException("Constructor search doesn't support expectedType argument", NameOf(expectedType))
-                        If Member.MemberType = System.Reflection.MemberTypes.Constructor Then
-                            Result.Add(CType(Member, TSearchedMembers))
-                        End If
-                    Case Else
-                        Throw New NotImplementedException("MemberType not yet supported, please file a feature request ticket at https://github.com/CompuMasterGmbH/CompuMaster.Reflection")
-                End Select
+                If expectedType Is Nothing Then
+                    If expectedName = Nothing OrElse Member.Name = expectedName Then
+                        Result.Add(CType(Member, TSearchedMembers))
+                    End If
+                Else
+                    Select Case GetType(TSearchedMembers)
+                        Case GetType(System.Reflection.MemberInfo)
+                            Throw New NotSupportedException("Filtering not supported for type MemberInfo, please use types derived from MemberInfo like FieldInfo, PropertyInfo, MethodInfo, etc. ")
+                        Case GetType(System.Reflection.FieldInfo)
+                            If Member.MemberType = System.Reflection.MemberTypes.Field AndAlso CType(Member, System.Reflection.FieldInfo).FieldType Is expectedType Then
+                                If expectedName = Nothing OrElse Member.Name = expectedName Then
+                                    Result.Add(CType(Member, TSearchedMembers))
+                                End If
+                            End If
+                        Case GetType(System.Reflection.PropertyInfo)
+                            If Member.MemberType = System.Reflection.MemberTypes.Property AndAlso CType(Member, System.Reflection.PropertyInfo).PropertyType Is expectedType Then
+                                If expectedName = Nothing OrElse Member.Name = expectedName Then
+                                    Result.Add(CType(Member, TSearchedMembers))
+                                End If
+                            End If
+                        Case GetType(System.Reflection.MethodInfo)
+                            If Member.MemberType = System.Reflection.MemberTypes.Method AndAlso CType(Member, System.Reflection.MethodInfo).ReturnType Is expectedType Then
+                                If expectedName = Nothing OrElse Member.Name = expectedName Then
+                                    Result.Add(CType(Member, TSearchedMembers))
+                                End If
+                            End If
+                        Case GetType(System.Reflection.EventInfo)
+                            If Member.MemberType = System.Reflection.MemberTypes.Event AndAlso CType(Member, System.Reflection.EventInfo).EventHandlerType Is expectedType Then
+                                If expectedName = Nothing OrElse Member.Name = expectedName Then
+                                    Result.Add(CType(Member, TSearchedMembers))
+                                End If
+                            End If
+                        Case GetType(System.Reflection.ConstructorInfo)
+                            If expectedType IsNot Nothing Then Throw New ArgumentException("Constructor search doesn't support expectedType argument", NameOf(expectedType))
+                            If expectedName IsNot Nothing Then Throw New ArgumentException("Constructor search doesn't support expectedName argument", NameOf(expectedName))
+                            If Member.MemberType = System.Reflection.MemberTypes.Constructor Then
+                                Result.Add(CType(Member, TSearchedMembers))
+                            End If
+                        Case Else
+                            Throw New NotImplementedException("MemberType not yet supported, please file a feature request ticket at https://github.com/CompuMasterGmbH/CompuMaster.Reflection")
+                    End Select
+                End If
             Next
+            If expectedName <> Nothing Then
+                If Result.Count = 0 Then
+                    Throw New System.MissingMemberException
+                ElseIf Result.Count = 1 Then
+                    'ok
+                Else
+                    Throw New System.Data.ConstraintException("Multiple members found with the very same name")
+                End If
+            End If
             Return Result
         End Function
 

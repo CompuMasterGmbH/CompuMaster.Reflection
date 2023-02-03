@@ -5,9 +5,13 @@ Imports CompuMaster.Reflection
 Public Class ReflectionTest
 
     <Test>
-    Public Sub TestGetMembers()
-        Assert.Throws(Of NotSupportedException)(Sub() PublicInstanceMembers.GetMembers(Of System.Reflection.MemberInfo)(GetType(Object), GetType(String)))
+    Public Sub TestInvokeMembersExceptions()
+        Dim Instance As Object = PublicInstanceMembers.InvokeConstructor(Of PseudoClassWithPublicMembers)
+        Assert.Throws(Of CompuMaster.Reflection.InvokeException)(Sub() PublicInstanceMembers.InvokeMethod(Instance, Instance.GetType, "MethodDoesNotExistAndInvokeMustFail", Nothing))
+    End Sub
 
+    <Test>
+    Public Sub TestGetMembers()
         Dim mp As List(Of System.Reflection.PropertyInfo)
         mp = PublicInstanceMembers.GetMembers(Of System.Reflection.PropertyInfo)(GetType(Object), GetType(String))
         Assert.AreEqual(0, mp.Count)
@@ -16,6 +20,13 @@ Public Class ReflectionTest
         mf = PublicInstanceMembers.GetMembers(Of System.Reflection.MethodInfo)(GetType(Object), GetType(String))
         Assert.AreEqual(1, mf.Count)
         Assert.AreEqual("ToString", mf(0).Name)
+
+        Assert.AreEqual("ToString", PublicInstanceMembers.GetMembers(Of System.Reflection.MethodInfo)(GetType(Object), GetType(String), "ToString").Name)
+        Assert.AreEqual("ToString", PublicInstanceMembers.GetMembers(Of System.Reflection.MethodInfo)(GetType(Object), "ToString").Name)
+
+        Assert.Throws(Of System.MissingMemberException)(Sub() PublicInstanceMembers.GetMembers(Of System.Reflection.MethodInfo)(GetType(Object), GetType(String), "MethodDoesNotExistAndInvokeMustFail"))
+        Assert.Throws(Of System.MissingMemberException)(Sub() PublicInstanceMembers.GetMembers(Of System.Reflection.MethodInfo)(GetType(Object), "MethodDoesNotExistAndInvokeMustFail"))
+        Assert.Throws(Of NotSupportedException)(Sub() PublicInstanceMembers.GetMembers(Of System.Reflection.MemberInfo)(GetType(Object), GetType(String)))
     End Sub
 
     <Test>
