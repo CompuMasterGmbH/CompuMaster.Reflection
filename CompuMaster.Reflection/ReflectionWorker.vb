@@ -13,6 +13,8 @@ Namespace CompuMaster.Reflection
             Dim Result As New List(Of TSearchedMembers)
             For Each Member In FoundMemberInfos
                 Select Case GetType(TSearchedMembers)
+                    Case GetType(System.Reflection.MemberInfo)
+                        Throw New NotSupportedException("Filtering not supported for type MemberInfo, please use types derived from MemberInfo like FieldInfo, PropertyInfo, MethodInfo, etc. ")
                     Case GetType(System.Reflection.FieldInfo)
                         If Member.MemberType = System.Reflection.MemberTypes.Field AndAlso CType(Member, System.Reflection.FieldInfo).FieldType Is expectedType Then
                             Result.Add(CType(Member, TSearchedMembers))

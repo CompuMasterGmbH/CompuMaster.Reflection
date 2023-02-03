@@ -5,6 +5,20 @@ Imports CompuMaster.Reflection
 Public Class ReflectionTest
 
     <Test>
+    Public Sub TestGetMembers()
+        Assert.Throws(Of NotSupportedException)(Sub() PublicInstanceMembers.GetMembers(Of System.Reflection.MemberInfo)(GetType(Object), GetType(String)))
+
+        Dim mp As List(Of System.Reflection.PropertyInfo)
+        mp = PublicInstanceMembers.GetMembers(Of System.Reflection.PropertyInfo)(GetType(Object), GetType(String))
+        Assert.AreEqual(0, mp.Count)
+
+        Dim mf As List(Of System.Reflection.MethodInfo)
+        mf = PublicInstanceMembers.GetMembers(Of System.Reflection.MethodInfo)(GetType(Object), GetType(String))
+        Assert.AreEqual(1, mf.Count)
+        Assert.AreEqual("ToString", mf(0).Name)
+    End Sub
+
+    <Test>
     Public Sub TestPublicInstanceMembers()
         Const ExpectedString As String = "This is public (instance)"
 
