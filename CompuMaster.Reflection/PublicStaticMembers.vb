@@ -9,7 +9,7 @@ Namespace CompuMaster.Reflection
     Public NotInheritable Class PublicStaticMembers
 
         Private Const MEMBERFILTER As System.Reflection.BindingFlags = System.Reflection.BindingFlags.Static Or System.Reflection.BindingFlags.Public
-        Private Const EXCEPTION_FILTERINFO As String = "public instance"
+        Private Const EXCEPTION_FILTERINFO As String = "public static"
 
         Public Shared Function GetMembers(Of TSearchedMembers As System.Reflection.MemberInfo)(objtype As Type, expectedType As Type) As List(Of TSearchedMembers)
             Return ReflectionWorker.GetMembers(Of TSearchedMembers)(MEMBERFILTER, EXCEPTION_FILTERINFO, objtype, expectedType)
