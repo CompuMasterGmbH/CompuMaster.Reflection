@@ -9,11 +9,14 @@
     <OptionStrict>On</OptionStrict>
     <Description>Reflection simplified for all-days-purposes</Description>
     <PackageIcon>logo_64x64.png</PackageIcon>
-    <RepositoryUrl>https://github.com/CompuMasterGmbH/CompuMaster.Reflection/</RepositoryUrl>
+    <RepositoryUrl>https://github.com/CompuMasterGmbH/CompuMaster.Reflection.git</RepositoryUrl>
+	<RepositoryType>git</RepositoryType>
     <PackageTags>Reflection,CreateObject,COM,Interop</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/CompuMasterGmbH/CompuMaster.Reflection/</PackageProjectUrl>
 	<GenerateDocumentationFile>true</GenerateDocumentationFile>
+	<IncludeSymbols>True</IncludeSymbols>
+	<SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
 
   <ItemGroup>
