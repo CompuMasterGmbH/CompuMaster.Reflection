@@ -6,6 +6,7 @@ Namespace CompuMaster.Reflection
     ''' <summary>
     ''' Provides simplified InvokeMember for public members of an instance object
     ''' </summary>
+    ''' <remarks>For all arguments for the called members, remember to use System.Reflection.Missing.Value where required</remarks>
     Public NotInheritable Class PublicStaticMembers
 
         Private Const MEMBERFILTER As System.Reflection.BindingFlags = System.Reflection.BindingFlags.Static Or System.Reflection.BindingFlags.Public
