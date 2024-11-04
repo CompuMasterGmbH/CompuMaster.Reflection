@@ -2,9 +2,9 @@
 
   <PropertyGroup>
     <RootNamespace></RootNamespace>
-    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net48;net8</TargetFrameworks>
     <Company>CompuMaster GmbH</Company>
-    <Copyright>2023 CompuMaster GmbH</Copyright>
+    <Copyright>2023-2024 CompuMaster GmbH</Copyright>
     <Title>CompuMaster.Reflection</Title>
     <OptionStrict>On</OptionStrict>
     <Description>Reflection simplified for all-days-purposes</Description>
