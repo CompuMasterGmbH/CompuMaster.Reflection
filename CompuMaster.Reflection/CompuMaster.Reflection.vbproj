@@ -5,18 +5,19 @@
     <TargetFrameworks>netstandard2.0;net48;net8</TargetFrameworks>
     <Company>CompuMaster GmbH</Company>
     <Copyright>2023-2024 CompuMaster GmbH</Copyright>
+    <Version>2024.12.04.100</Version>
     <Title>CompuMaster.Reflection</Title>
     <OptionStrict>On</OptionStrict>
     <Description>Reflection simplified for all-days-purposes</Description>
     <PackageIcon>logo_64x64.png</PackageIcon>
     <RepositoryUrl>https://github.com/CompuMasterGmbH/CompuMaster.Reflection.git</RepositoryUrl>
-	<RepositoryType>git</RepositoryType>
+    <RepositoryType>git</RepositoryType>
     <PackageTags>Reflection,CreateObject,COM,Interop</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/CompuMasterGmbH/CompuMaster.Reflection/</PackageProjectUrl>
-	<GenerateDocumentationFile>true</GenerateDocumentationFile>
-	<IncludeSymbols>True</IncludeSymbols>
-	<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <IncludeSymbols>True</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
 
   <ItemGroup>
