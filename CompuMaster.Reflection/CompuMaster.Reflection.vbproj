@@ -5,7 +5,7 @@
     <TargetFrameworks>netstandard2.0;net48;net8</TargetFrameworks>
     <Company>CompuMaster GmbH</Company>
     <Copyright>2023-2024 CompuMaster GmbH</Copyright>
-    <Version>2024.12.04.100</Version>
+    <Version>1.0.2024.1204</Version>
     <Title>CompuMaster.Reflection</Title>
     <OptionStrict>On</OptionStrict>
     <Description>Reflection simplified for all-days-purposes</Description>
