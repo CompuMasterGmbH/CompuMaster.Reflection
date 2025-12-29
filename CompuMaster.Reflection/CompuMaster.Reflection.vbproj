@@ -4,8 +4,8 @@
     <RootNamespace></RootNamespace>
     <TargetFrameworks>netstandard2.0;net48;net8</TargetFrameworks>
     <Company>CompuMaster GmbH</Company>
-    <Copyright>2023-2024 CompuMaster GmbH</Copyright>
-    <Version>1.0.2024.1204</Version>
+    <Copyright>2023-2025 CompuMaster GmbH</Copyright>
+    <Version>1.0.2025.1229</Version>
     <Title>CompuMaster.Reflection</Title>
     <OptionStrict>On</OptionStrict>
     <Description>Reflection simplified for all-days-purposes</Description>
@@ -26,6 +26,12 @@
     <Compile Remove="ObjectCollectionChildBase.vb" />
   </ItemGroup>
 
+  <PropertyGroup>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="../README.md" Pack="true" PackagePath="/"/>
+  </ItemGroup>
   <ItemGroup>
     <None Include="..\logo_64x64.png">
       <Pack>True</Pack>
