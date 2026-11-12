@@ -4,8 +4,8 @@
     <RootNamespace></RootNamespace>
     <TargetFrameworks>netstandard2.0;net48;net8</TargetFrameworks>
     <Company>CompuMaster GmbH</Company>
-    <Copyright>2023-2025 CompuMaster GmbH</Copyright>
-    <Version>1.0.2025.1229</Version>
+    <Copyright>2023-2026 CompuMaster GmbH</Copyright>
+    <Version>1.0.2026.1112</Version>
     <Title>CompuMaster.Reflection</Title>
     <OptionStrict>On</OptionStrict>
     <Description>Reflection simplified for all-days-purposes</Description>
